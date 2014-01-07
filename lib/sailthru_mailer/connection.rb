@@ -8,7 +8,7 @@ module SailthruMailer
       )
     end
     def deliver(*args)
-      @client.send(*args)
+      @client.send_email(*args)
     end
     # proxy all methods to @client
     def method_missing(m, *args, &block)
