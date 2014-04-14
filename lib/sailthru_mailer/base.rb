@@ -55,12 +55,13 @@ module SailthruMailer
       # handle test mode
       return SailthruMailer.deliveries << self if SailthruMailer.test
       # response = sailthru.send(template_name, email, vars, options, schedule_time)
+      send_time = self.date.utc.to_s if self.date
       self.class.connection.deliver(
         self.template, 
         self.all_recipients,
         self.formatted_vars,
         self.formatted_options,
-        (self.date || Time.now).utc.to_s
+        send_time
       )
     end
     # formatted variable hash, ready for JSON encoding
